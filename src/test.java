@@ -11,86 +11,88 @@ import java.util.Scanner;
 //陣列型態用Objecy
 //case裡面改成呼叫方法
 //全部scanner接收型態改成string 再轉int
-//remove 不用真的remove 可以直接set 改成下一個順位
-//用Treemap去接<priority,一個普通的map> treemap<priority,Map>  ->普通Map接剩下的<deadline,description>
-public class Main {
+//0409 priority 遞補順序2.remove
+//((String)objRes)
+//若有需要 字串陣列跟整數陣列 寫兩個陣列
+public class test {
     public static void main(String[] args) {
-        List<String> descriptionList = new ArrayList<>();
-        List<Integer> priorityList = new ArrayList<>();
-        List<String> deadlineList = new ArrayList<>();
         Scanner scanner = new Scanner(System.in);
+        List<Object> list = new ArrayList<>();//一個String 一個Interger 給priority
         for (; ; ) {
-
             System.out.println("Welcome to your Todo List. Enter an option ");
-
-//            System.out.println("Enter an option");
             System.out.println("1.Add an item");
             System.out.println("2.Remove an item");
             System.out.println("3.Print the list ");
             System.out.println("4.Quit");
 
             //待辦事項 存進去String 陣列中 priority 可以用 set 調換位子
-            //getOption(scannerOption);
+
             int option = getOption();//option防呆
 
             if (option==4){
                 System.out.println("Goodbye");
                 break;
             }
-
+//description:0、3   priority:1、4  deadLine:2、5
             switch (option) {
                 case 1://Add an item
                     System.out.println("Enter a description for the new item");
-                    scanner.nextLine();
                     String description = scanner.nextLine();
-                    descriptionList.add(description);
+                    list.add(description);
                     System.out.println("Enter a priority for the new item (1~5)");
-                    int priority = scanner.nextInt();
-
-                    if (priorityList.contains(priority)) {
-                        System.out.println("priority iterate.put priority to the next one");
-                        priority=(priorityList.size()+ 1);
-                    }
-
-                    priorityList.add(priority);
-//                        priority=0;
+                    String priority = scanner.nextLine();
+                    list.add(priority);
                     System.out.println("Enter a deadline for the new item(yyyy-mm-dd)");
-                    String deadLine = scanner.next();
-                    deadlineList.add(deadLine);
+                    String deadLine = scanner.nextLine();
+                    list.add(deadLine);
+
                     System.out.println("Item added");
                     System.out.println();
                     break;
                 case 2://Remove an item
                     System.out.println("Enter the number of the item you wanna  remove");
                     //用 Map get key&Value 去remove
-                    int removeNum = scanner.nextInt();
-
-                    descriptionList.remove(removeNum - 1);
-                    priorityList.remove(removeNum - 1);//
-                    deadlineList.remove(removeNum - 1);//
-                    //if removeNum =1 priorityList 全部-1
-                    //if removeNum >priorityList.get(removeNum)
-                    if (removeNum==1){
-                        for (int i=0 ; i <priorityList.size(); i++){
-                            priorityList.set(i,i+1);
+                    String  removeNum = scanner.nextLine();
+                    if (removeNum.equals("1")){
+//                        list.remove(0);
+//                        list.remove(1);
+//                        list.remove(2);
+                        for (int i=0; i< list.size()/3; i++){//若只有1 會出錯
+                            list.set(i*3+1,i+1);
                         }
                     }
-                    if (removeNum>1){
-                        for (int i = 1 ; i<priorityList.size() ;i++){
-                            priorityList.set(i,i+1);
+                    if (removeNum.equals("2")){
+//                        list.remove(3);
+//                        list.remove(4);
+//                        list.remove(5);
+                        for (int i=0 ; i< list.size()/3 ; i++){
+                            list.set(i*3+1,i+1);
                         }
                     }
-//                    priorityList.set(priorityList.size() - 1, (priorityList.get(removeNum - 1)) - 1);
+                    if (removeNum.equals("3")){
+//                        list.remove(6);
+//                        list.remove(7);
+//                        list.remove(8);
+                    }
+                    if (removeNum.equals("4")){
+//                        list.remove(9);
+//                        list.remove(10);
+//                        list.remove(11);
+                    }
+                    if (removeNum.equals("5")){
+//                        list.remove(12);
+//                        list.remove(13);
+//                        list.remove(14);
+                    }
 
                     System.out.println("Remove successfully");
                     break;
                 case 3://Print the list
                     System.out.println();
                     System.out.println("Your Todo List is");
-
                     // print descriptionList + priorityList + deadlineList
-                    for (int i = 0; i < deadlineList.size(); i++) {
-                        System.out.printf("%d.%s (priority %d , due by %s ) \n", i + 1, descriptionList.get(i), priorityList.get(i), deadlineList.get(i));
+                    for (int i=0 ; i<list.size(); i+=3){
+                        System.out.printf("%d.%s (priority %s , due by %s ) \n",(i/3)+1,list.get(i),list.get(i+1),list.get(i+2));
                     }
                     System.out.printf("\n");
                     break;
