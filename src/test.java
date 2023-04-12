@@ -53,47 +53,27 @@ public class test {
                     System.out.println("Enter the number of the item you wanna  remove");
                     //用 Map get key&Value 去remove
                     String  removeNum = scanner.nextLine();
-                    if (removeNum.equals("1")){
-//                        list.remove(0);
-//                        list.remove(1);
-//                        list.remove(2);
-                        for (int i=0; i< list.size()/3; i++){//若只有1 會出錯
-                            list.set(i*3+1,i+1);
-                        }
-                    }
-                    if (removeNum.equals("2")){
-//                        list.remove(3);
-//                        list.remove(4);
-//                        list.remove(5);
-                        for (int i=0 ; i< list.size()/3 ; i++){
-                            list.set(i*3+1,i+1);
-                        }
-                    }
-                    if (removeNum.equals("3")){
-//                        list.remove(6);
-//                        list.remove(7);
-//                        list.remove(8);
-                    }
-                    if (removeNum.equals("4")){
-//                        list.remove(9);
-//                        list.remove(10);
-//                        list.remove(11);
-                    }
-                    if (removeNum.equals("5")){
-//                        list.remove(12);
-//                        list.remove(13);
-//                        list.remove(14);
-                    }
 
+                    if (removeNum.equals("1")){
+                        list.removeAll(list.subList(0,3));
+//                        for (int i = 0 ; i <list.size()-1 ; i++){
+//                            list.set(i,list.get(i));
+//                        }
+
+
+
+                    }
+                    System.out.println(list);
                     System.out.println("Remove successfully");
                     break;
                 case 3://Print the list
                     System.out.println();
                     System.out.println("Your Todo List is");
                     // print descriptionList + priorityList + deadlineList
-                    for (int i=0 ; i<list.size(); i+=3){
-                        System.out.printf("%d.%s (priority %s , due by %s ) \n",(i/3)+1,list.get(i),list.get(i+1),list.get(i+2));
+                    for (int i=0 ; i<list.size(); i++){
+                        System.out.printf("priority %s.%s ( due by %s ) \n",list.get(i+1),list.get(i),list.get(i+2));
                     }
+                    System.out.println(list);
                     System.out.printf("\n");
                     break;
             }
